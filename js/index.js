@@ -35,12 +35,47 @@ var app = {
 		  console.log('Server: ' + e.data);
 		};
 
-		var socket = io.connect('http://localhost');
+		/*var socket = io.connect('http://localhost');
 		socket.on('news', function (data) {
 			console.log(data);
 			socket.emit('my other event', { my: 'data' });
-		});
+		});*/
 
+		this.socketio();
+
+    },
+
+    // socketio fun!
+    // connecting to the http server (by using the specific port). 
+    // After that there are several listeners which are updating the front end containers. 
+    // There is only one place where the script sends something to the back-end and 
+    // this is when the user clicks on the block.
+    socketio: function() {
+ 
+	    var welcome = document.getElementById("welcome");
+	    var allUsers = document.getElementById("users");
+	    var progress = document.getElementById("progress");
+	    var results = document.getElementById("results");
+	 
+	    var socket = io.connect('http://localhost:3250');
+	    socket.on('welcome', function (data) {
+	        console.log(data);
+	        welcome.innerHTML = "Welcome to the game <strong>" + data.name + "</strong>";
+	    });
+	    socket.on('users', function (data) {
+	        allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
+	    });
+	    socket.on('update', function (data) {
+	        progress.innerHTML = data.currentWidth;
+	        progress.style.width = parseInt(data.currentWidth) + "px";
+	    });
+	    socket.on('win', function (data) {
+	        results.innerHTML = data.message;
+	    });
+	 
+	    progress.onclick = function() {
+	        socket.emit("click");
+	    }
     }
     
 };
