@@ -3,45 +3,41 @@ var app = {
     // Application Constructor
     initialize: function() {
     	console.log('RUNNING');
-        var connection = new WebSocket('ws://html5rocks.websocket.org/echo', ['soap', 'xmpp']);
 
-        // When the connection is open, send some data to the server
-		connection.onopen = function () {
-		  	connection.send('Ping'); // Send the message 'Ping' to the server
+    	/* we create an array, which will store all the messages, a socket object, 
+    	and few shortcuts to our DOM elements. Again, similar to the back-end, we bind a function, 
+    	which will react to the socket's activity. In our case, this is an event, named message. 
+    	When such an event occurs, we expect to receive an object, data, with the property, message. 
+    	Add that message to our storage and update the content div. 
+    	We’ve also included the logic for sending the message. It’s quite simple, simply emitting a 
+    	message with the name, send.
+    	*/
 
-		  	// Sending String
-			connection.send('Hi! I am testing websockets!');
 
-			// Sending canvas ImageData as ArrayBuffer
-			//var img = canvas_context.getImageData(0, 0, 400, 320);
-			//var binary = new Uint8Array(img.data.length);
-			//for (var i = 0; i < img.data.length; i++) {
-			//  binary[i] = img.data[i];
-			//}
-			//connection.send(binary.buffer);
-
-			// Sending file as Blob
-			//var file = document.querySelector('input[type="file"]').files[0];
-			//connection.send(file);
-		};
-
-		// Log errors
-		connection.onerror = function (error) {
-		  console.log('WebSocket Error ' + error);
-		};
-
-		// Log messages from the server
-		connection.onmessage = function (e) {
-		  console.log('Server: ' + e.data);
-		};
-
-		/*var socket = io.connect('http://localhost');
-		socket.on('news', function (data) {
-			console.log(data);
-			socket.emit('my other event', { my: 'data' });
-		});*/
-
-		this.socketio();
+        var messages = [];
+	    var socket = io.connect('http://localhost:3700');
+	    var field = document.getElementById("field");
+	    var sendButton = document.getElementById("send");
+	    var content = document.getElementById("content");
+	 
+	    socket.on('message', function (data) {
+	        if(data.message) {
+	            messages.push(data.message);
+	            var html = '';
+	            for(var i=0; i<messages.length; i++) {
+	                html += messages[i] + '<br />';
+	            }
+	            content.innerHTML = html;
+	        } else {
+	            console.log("There is a problem:", data);
+	        }
+	    });
+	 
+	    sendButton.onclick = function() {
+	        var text = field.value;
+	        socket.emit('send', { message: text });
+	    }
+		//this.socketio();
 
     },
 
