@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Websockets</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap-responsive.css" rel="stylesheet"> <!--  OFR ADDING RESPONSIVE BOOTSRAP -->
+    <!-- <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet"> <!--  OFR ADDING FONT AWESOME -->
+
+    <!-- Custom styles for this template -->
+    <style type="text/css">
+        body {
+          padding-top: 50px;
+        }
+        .starter-template {
+          padding: 40px 15px;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- nav -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Websockets</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <!-- end nav -->
+
+    <!-- container-->
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Websockets</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div>
+
+
+      <div id="welcome"></div>
+      <hr />
+      <div id="progress"></div>
+      <div id="win">150</div>
+      <hr />
+      <div id="users"></div>
+      <hr />
+      <div id="results"></div>
+
+      
+    </div>
+    <!-- /.container -->
+
+    <script type="text/javascript" src="js/jquery.10.1.2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="server/server.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+  </body>
+</html>
