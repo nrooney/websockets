@@ -39,7 +39,7 @@ Every Socket.io application begins with a connection handler. We should have one
 */
 
 io.sockets.on('connection', function (socket) {
-    socket.emit('message', { message: 'welcome to the chat' });
+    socket.emit('message', { message: '<div id="connected">connected</div>' });
     socket.on('send', function (data) {
         io.sockets.emit('message', data);
     });

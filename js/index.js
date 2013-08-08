@@ -16,6 +16,7 @@ var app = {
 
         var messages = [];
 	    var socket = io.connect('http://localhost:3700');
+	    var user = document.getElementById("user");
 	    var field = document.getElementById("field");
 	    var sendButton = document.getElementById("send");
 	    var content = document.getElementById("content");
@@ -25,7 +26,7 @@ var app = {
 	            messages.push(data.message);
 	            var html = '';
 	            for(var i=0; i<messages.length; i++) {
-	                html += messages[i] + '<br />';
+	                html += messages[i];
 	            }
 	            content.innerHTML = html;
 	        } else {
@@ -34,7 +35,9 @@ var app = {
 	    });
 	 
 	    sendButton.onclick = function() {
-	        var text = field.value;
+	        var text = '<div class="wholemessage"><div class="auser">' + user.value + '</div><div class="amessage">' + 
+	        			field.value + '</div></div>';
+	        field.value = '';
 	        socket.emit('send', { message: text });
 	    }
 		//this.socketio();

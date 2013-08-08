@@ -6165,35 +6165,3 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
-
-/* Natasha's CSS */
-
-.starter-template div{
-  margin: 10px 0;
-}
-
-.starter-template #content{
-  width: 100%;
-}
-
-.starter-template #content #connected{
-  background: #eee;
-  padding: 10px;
-}
-
-.starter-template .wholemessage{
-  width: 100%;
-  border-bottom: 1px solid #555;
-}
-
-.starter-template #content .auser{
-  display: inline-table;
-  width: 25%;
-}
-
-.starter-template #content .amessage{
-  display: inline-table;
-  width: 75%;
-}
-
-
